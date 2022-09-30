@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!--Lista Ordenes de Servicio-->
+        <record id="salon_order_tree_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon_order_tree.tree.inherit</field>
+            <field name="model">salon.order</field>
+            <field name="inherit_id" ref="salon_management.salon_order_tree"/>
+            <field name="arch" type="xml">
+                <field name= "name" position="after">
+                    <field name="customer_name"></field>
+                    <field name="partner_id"></field>
+                </field>
+            </field>
+        </record>
+        <!--Formulario: Ordenes de Servicio-->
+        <record id="salon_order_form_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon_order_form.form.inherit</field>
+            <field name="model">salon.order</field>
+            <field name="inherit_id" ref="salon_management.salon_order_form"/>
+            <field name="arch" type="xml">
+                <!--
+                <field name="name" position="after">
+                    <field name="customer_name"></field>
+                </field>
+                -->
+                <xpath expr="//header" position="inside">
+                    <button name="salon_saleorder_create" attrs="{'invisible': [('stage_id', '!=', 2)]}" string="Create Sale Order" type="object" class="oe_highlight"/>
+                </xpath>
+                <field name="date" position="replace">
+                    <field name="date" widget="date"/>
+                </field>
+                <field name="chair_id" position="replace">
+                    <field name="chair_id" attrs="{'readonly': [('stage_id', '!=', 1)]}"/>
+                </field>
+                <field name="date" position="after">
+                    <field name="chair_user"></field>
+                    <field name="color" widget="color_picker"></field>
+                </field>
+            </field>
+        </record>
+
+        
+        <!--Kanban Ordenes de Servicio-->
+        <record id="salon_order_kanban_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon_order_kanban.kanban.inherit</field>
+            <field name="model">salon.order</field>
+            <field name="inherit_id" ref="salon_management.salon_order_kanban"/>
+            <field name="arch" type="xml">
+                    
+                <field name="date" position="replace">
+                    <field name="start_time"></field>
+                </field>
+                
+                <xpath expr="//div[hasclass('text-muted')]" position="replace">
+                    <field name="start_time"></field>
+                </xpath>
+            </field>
+        </record>
+        <!--
+            <div class="text-muted">
+                <a>Date :</a>
+
+                <field name= "name" position="after">
+                    <field name="customer_name"></field>
+                    <field name="start_time"></field>
+                </field>
+        -->
+
+        <!--********************************************************************-->
+        <!--Formulario Reservas/Bookings-->
+        <record id="salon_booking_form_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon_booking_form.inherit</field>
+            <field name="model">salon.booking</field>
+            <field name="inherit_id" ref="salon_management.salons_booking_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="partner_id"></field>
+                </field>
+                <field name="chair_id" position="after">
+                    <field name="user_id"></field>
+                    <field name="color" widget="color_picker"></field>
+                </field>
+
+            </field>
+        </record>
+        <!--Lista Reserva/Bookings-->
+        <record id="salon_booking_tree_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon_booking_tree.inherit</field>
+            <field name="model">salon.booking</field>
+            <field name="inherit_id" ref="salon_management.salons_booking_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="chair_id"></field>
+                    <field name="user_id"></field>
+                    <field name="color" widget="color_picker"></field>
+                </field>
+            </field>
+        </record>
+        <!--Calendar Ordenes de Servicio-->
+        <record id="salon_order_view_calendar" model="ir.ui.view">
+            <field name="name">salon_order.view.calendar</field>
+            <field name="model">salon.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Salon Order Celendar" date_start="start_time" color="color">
+                    <field name="name"></field>
+                    <field name="chair_id"></field> 
+
+                    <field name="customer_name"></field>
+                    
+                </calendar>
+            </field>
+        </record>
+        <!--Salon Chair Form-->
+        <record id="salon_chair_form_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon.chair.view.form.inherit</field>
+            <field name="model">salon.chair</field>
+            <field name="inherit_id" ref="salon_management.salon_chair_form"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="color" widget="color_picker"></field>
+                </field>
+            </field>
+        </record>
+        <!--Salon Chair List-->
+        <record id="salon_chair_tree_inherit_salon_alconsoft" model="ir.ui.view">
+            <field name="name">salon.chair.view.tree.inherit</field>
+            <field name="model">salon.chair</field>
+            <field name="inherit_id" ref="salon_management.salon_chair_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="color" widget="color_picker"></field>
+                </field>
+            </field>
+        </record>
+        <!--Formulario: res.partner-->
+        <record id="res_partner_form_inh_salon_alconsoft" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit.salon</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <h2>
+                        <span>Partner Salon: </span>
+                        <field name="partner_salon" widget="boolean_button"></field>
+                    </h2>
+                </field>
+            </field>
+        </record>
+        <!--Formulario: sale.order-->
+        <record id="sale_order_form_inh_salon_alconsoft" model="ir.ui.view">
+            <field name="name">sale.order.view.form.inherit_salon</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='partner_details']" position="inside">
+                    <field name="chair_user_id"></field>
+                    <field name="chair_id"></field>
+                </xpath>
+            </field>
+        </record>
+        <!--Formulario: sale.order-->
+        <record id="sale_order_tree_inh_salon_alconsoft" model="ir.ui.view">
+            <field name="name">sale.order.view.tree.inherit_salon</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="chair_user_id" optional="show"></field>
+                    <field name="chair_id" optional="show"></field>
+                </field>
+                
+            </field>
+        </record>
+
+    </data>
+    
+</odoo>
