@@ -30,6 +30,7 @@
                 </xpath>
                 <field name="date" position="replace">
                     <field name="date" widget="date"/>
+                    <field name="start_time" widget="datetime"/>
                 </field>
                 <field name="chair_id" position="replace">
                     <field name="chair_id" attrs="{'readonly': [('stage_id', '!=', 1)]}"/>
@@ -38,6 +39,9 @@
                     <field name="chair_user"></field>
                     <field name="color" widget="color_picker"></field>
                 </field>
+                <xpath expr="//button[@name='salon_invoice_create']" position="replace">
+                    <button name="salon_invoice_create" attrs="{'invisible': [('stage_id', '!=', 0)]}" string="Create Invoice" type="object" class="oe_highlight"/>
+                </xpath>
             </field>
         </record>
 
@@ -55,6 +59,7 @@
                 
                 <xpath expr="//div[hasclass('text-muted')]" position="replace">
                     <field name="start_time"></field>
+                    <field name="name"></field>
                 </xpath>
             </field>
         </record>
@@ -106,8 +111,9 @@
                 <calendar string="Salon Order Celendar" date_start="start_time" color="color">
                     <field name="name"></field>
                     <field name="chair_id"></field> 
-
                     <field name="customer_name"></field>
+
+                    <field name="chair_id" write_model="calendar.chairs" write_field="chair_id" avatar_field="image_small"></field>
                     
                 </calendar>
             </field>

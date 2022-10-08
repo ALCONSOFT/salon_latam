@@ -1,6 +1,7 @@
 
 from datetime import date, datetime, timedelta
 import email
+from email.policy import default
 from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
@@ -158,3 +159,30 @@ class SaleOrderSalon(models.Model):
     chair_user_id = fields.Many2one('res.users', string="Chair User")
     chair_id = fields.Many2one('salon.chair', string="Chair", required=True)
 
+class SalonAlconsoftPartner(models.Model):
+	_inherit = 'res.partner'
+
+	def action_view_sale_order(self):
+	    return
+    
+class SanlonAlconsoftPartner2(models.Model):
+    _inherit = 'res.partner'
+
+    partner_salon = fields.Boolean(string="Es Cliente Salon", default=True, required=True)
+
+class SalonContacts(models.Model):
+    _name = 'calendar.chairs'
+    _description = 'Calendar Chairs'
+
+    user_id = fields.Many2one('res.users', 'Me', required=True, default=lambda self: self.env.user)
+    #partner_id = fields.Many2one('res.partner', 'Employee', required=True)
+    chair_id = fields.Many2one('salon.chair', string="Chair", required=True)
+    active = fields.Boolean('Active', default=True)
+
+    _sql_constraints = [
+        ('user_id_chair_id_unique', 'UNIQUE(user_id, chair_id)', 'A user cannot have the same chair twice.')
+    ]
+
+    @api.model
+    def unlink_from_chair_id(self, chair_id):
+        return self.search([('chair_id', '=', chair_id)]).unlink()

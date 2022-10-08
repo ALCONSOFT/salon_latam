@@ -19,17 +19,17 @@
 #
 ###################################################################################
 {
-    'name': 'Beauty Spa Management Alconsoft-Sistech',
-    'summary': """Beauty Parlour Management with Online Booking System Alconsoft""",
-    'version': '14.0.0.1',
+    'name': 'Beauty Spa Management Salon Latam Alconsoft-Sistech',
+    'summary': """Salon LATAM - Beauty Parlour Management with Online Booking System Alconsoft""",
+    'version': '14.0.0.2',
     'author': 'Alejandro Concepcion',
     'website': "http://www.alconsoft.net",
     'company': 'Alconsoft-Sistech',
-    'live_test_url': 'https://www.youtube.com/watch?v=TFmupz8MRm0&feature=youtu.be',
     "category": "Industries",
-    'depends': ['salon_management'],
+    'depends': ['salon_management','sale_management'],
     'data': [
              'views/salon_alconsoft.xml',
+             'security/ir.model.access.csv'
              ],
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',

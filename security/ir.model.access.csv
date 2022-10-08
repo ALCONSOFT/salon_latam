@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+view_calendar_chairs,view.calendar.chairs,model_calendar_chairs,salon_management.group_salon_user,1,1,1,0
+view_calendar_chairs,view.calendar.chairs,model_calendar_chairs,salon_management.group_salon_manager,1,1,1,1
