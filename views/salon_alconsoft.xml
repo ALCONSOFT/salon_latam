@@ -112,6 +112,7 @@
                     <field name="name"></field>
                     <field name="chair_id"></field> 
                     <field name="customer_name"></field>
+                    <field name="chair_user"></field>
 
                     <field name="chair_id" write_model="calendar.chairs" write_field="chair_id" avatar_field="image_small"></field>
                     
