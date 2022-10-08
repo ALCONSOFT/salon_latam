@@ -179,6 +179,21 @@
                 
             </field>
         </record>
+        <!--Accion de Ventanas: salon.order-->
+        <record id="salon_management.salon_active_orders_action_dashboard" model="ir.actions.act_window">
+            <field name="name">Salon Orders</field>
+            <field name="res_model">salon.order</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('chair_id', '=', active_id)]</field>
+        </record>
+        <record id="salon_management.salon_order_action" model="ir.actions.act_window">
+            <field name="name">Salon</field><!--            <field name="view_type">form</field>-->
+
+            <field name="res_model">salon.order</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+        </record>
+
+
 
     </data>
     
